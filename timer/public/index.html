@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Bare - Start Bootstrap Template</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script><!-- load angular -->
+
+    <script src="core.js"></script>
+    <!-- Custom CSS -->
+    <style>
+    body {
+        padding-top: 70px;
+        /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
+    }
+    </style>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body ng-app="jobbeapp">
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Jåbeapp</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li>
+                       <a href="#" style="font-style:italic;">Laget av Kristoffer Osen, for trappen</a>
+                    </li>
+
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <!-- Page Content -->
+    <div class="container" ng-controller="mainController">
+
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h1>Jåbeeapp</h1>
+            </div>
+        </div>
+        <!-- /.row -->
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        Leg til ny jåb
+                    </div>
+                    <!-- /.panel-heading -->
+                    <div class="panel-body">
+                        <label class="modal-input-label">Hvem</label>
+                        <select class="form-control" ng-model="formData.Jobbemann">
+                            <option value="" selected disabled>Hvem</option>
+                            <option>Christer</option>
+                            <option>Daniel</option>
+                            <option>Kristoffer</option>
+                        </select>
+
+                        <label class="modal-input-label" style="margin-top:15px">Timer</label>
+                        <input type="text" name="exKeyEdit"  class="form-control modal-input" placeholder="Timer" ng-model="formData.Timer">
+
+                        <label class="modal-input-label" style="margin-top:15px">Dato</label>
+                        <input type="text" name="exKeyEdit"  class="form-control modal-input" placeholder="Dato" ng-model="formData.Dato">
+
+                        <label class="modal-input-label" style="margin-top:15px">Kommentar</label>
+                        <textarea class="form-control " rows="3" placeholder="Kommentar" ng-model="formData.Kommentar"></textarea>
+
+                        <button type="button" class="btn btn-success btn-md" style="margin-top:15px; float:right" ng-click="createJobb()">Lagre</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default" style="box-sizing: unset;">
+                    <div class="panel-heading">
+                       Oversikt
+                    </div>
+                    <!-- /.panel-heading -->
+
+                    <div class="panel-body">
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a href="#home" data-toggle="tab">Kristoffer</a>
+                            </li>
+                            <li><a href="#profile" data-toggle="tab">Daniel</a>
+                            </li>
+                            <li><a href="#messages" data-toggle="tab">Christer</a>
+                            </li>
+
+                        </ul>
+
+                        <!-- Tab panes -->
+                        <div class="tab-content">
+                            <div class="tab-pane fade in active" id="home">
+                                <table class="table table-bordered" style="margin-top:15px">
+                                    <tbody>
+                                    <td><a>Jobbemann</a></td>
+                                    <td><a>Timer</a></td>
+                                    <td><a>Dato</a></td>
+                                    <td><a>Kommentar</a></td>
+                                    </tbody>
+                                    <tr ng-repeat="jobb in jobbs | filter: {'Jobbemann':'Kristoffer'}">
+                                        <td>{{jobb.Jobbemann}}</td>
+                                        <td>{{jobb.Timer}}</td>
+                                        <td>{{jobb.Dato}}</td>
+                                        <td>{{jobb.Kommentar}}</td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="tab-pane fade" id="profile">
+                                <table class="table table-bordered" style="margin-top:15px">
+                                    <tbody>
+                                    <td><a>Jobbemann</a></td>
+                                    <td><a>Timer</a></td>
+                                    <td><a>Dato</a></td>
+                                    <td><a>Kommentar</a></td>
+                                    </tbody>
+                                    <tr ng-repeat="jobb in jobbs | filter: {'Jobbemann':'Daniel'}">
+                                        <td>{{jobb.Jobbemann}}</td>
+                                        <td>{{jobb.Timer}}</td>
+                                        <td>{{jobb.Dato}}</td>
+                                        <td>{{jobb.Kommentar}}</td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="tab-pane fade" id="messages">
+                                <table class="table table-bordered" style="margin-top:15px">
+                                    <tbody>
+                                    <td><a>Jobbemann</a></td>
+                                    <td><a>Timer</a></td>
+                                    <td><a>Dato</a></td>
+                                    <td><a>Kommentar</a></td>
+                                    </tbody>
+                                    <tr ng-repeat="jobb in jobbs | filter: {'Jobbemann':'Christer'}">
+                                        <td>{{jobb.Jobbemann}}</td>
+                                        <td>{{jobb.Timer}}</td>
+                                        <td>{{jobb.Dato}}</td>
+                                        <td>{{jobb.Kommentar}}</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- /.container -->
+
+    <!-- jQuery Version 1.11.1 -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+
+</body>
+
+</html>
